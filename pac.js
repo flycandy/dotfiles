@@ -33,9 +33,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 var PROXY_METHOD = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
-var PROXY_NTU = 'SOCKS5 alihk3.tangyouze.com:1080';
-var PROXY_CHROME_REMOTE_DESKTOP = 'SOCKS5 localhost:1081';
-var PROXY_KUBE = 'SOCKS5 localhost:1082';
+var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1081';
 
 
 // A very long list. Hopefully chrome will cache it.
@@ -752,17 +750,7 @@ var RULES = [
         ".fantong.com"
     ]
 ];
-function insideNTU(host) {
-    var list = ['f1', 'f2', 'f3', 'f4', 'f5', 'svr1', 'macmini', 'f138'];
-    return list.some(function (item) {
-        return item + '.tangyouze.com' === host;
-    });
-}
 
-function isKubeHost(host) {
-    var match = "100.64";
-    return host.substring(0, match.length) == match;
-}
 
 /**
  * @return {string}
@@ -800,13 +788,10 @@ function FindProxyForURL(url, host) {
 
     // skip local hosts
     //noinspection JSUnresolvedFunction
-    if (isKubeHost(host)) {
-        return PROXY_KUBE;
-    }
-    else if (isPlainHostName(host) === true || check_ipv4() === true || rule_filter(isDomain) === true) {
+    if (isPlainHostName(host) === true || check_ipv4() === true || rule_filter(isDomain) === true) {
         return "DIRECT";
     }
-    else if (host == 'relay.google.com') {
+    else if (host == 'google.com') {
         return PROXY_CHROME_REMOTE_DESKTOP;
     } else if (insideNTU(host)) {
         return PROXY_NTU;
