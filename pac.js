@@ -793,8 +793,6 @@ function FindProxyForURL(url, host) {
     }
     else if (host == 'google.com') {
         return PROXY_CHROME_REMOTE_DESKTOP;
-    } else if (insideNTU(host)) {
-        return PROXY_NTU;
     } else {
         // if none of above cases, it is always safe to use the proxy
         return PROXY_METHOD;
