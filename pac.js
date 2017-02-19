@@ -27,7 +27,9 @@ var RULES = [
 ];
 
 var RULES_SG = [
-      ".google.com"
+      ".google.com",
+      ".google.com.hk",
+      ".google.com.sg"
 ];
 /**
  * @return {string}
