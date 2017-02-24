@@ -23,7 +23,8 @@ var RULES = [
       ".googleapis.com",
       ".gstatic.com",
       ".googleusercontent.com",
-      ".twitter.com"
+      ".twitter.com",
+      ".w3schools.com"
 ];
 
 var RULES_SG = [
