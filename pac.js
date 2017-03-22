@@ -16,6 +16,7 @@ var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1081';
 var RULES = [
       ".facebook.com",
       ".fbcdn.net",
+      ".tensorflow.org",
       ".googlevideo.com",
       ".ytimg.com",
       ".ggpht.com",
