@@ -1,0 +1,1 @@
+alias doquantlib="docker run -it --rm -e QB_REGION=alihk -v /home/id_rsa_bitbucket:/repo-key qbtrade/python bash -c 'git clone --depth 1 git@github.com:qbtrade/quantlib.git && cd quantlib && make prod && bash'"
