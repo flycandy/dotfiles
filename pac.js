@@ -27,7 +27,8 @@ var RULES = [
       ".googleusercontent.com",
       ".twitter.com",
       ".w3schools.com",
-      ".dropbox.com"
+      ".dropbox.com",
+      ".poloniex.com"
 ];
 
 var RULES_SG = [
