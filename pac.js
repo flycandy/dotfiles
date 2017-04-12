@@ -30,7 +30,8 @@ var RULES = [
   ".twitter.com",
   ".w3schools.com",
   ".dropbox.com",
-  ".poloniex.com"
+  ".poloniex.com",
+  ".jsfiddle.net",
 ];
 
 var RULES_SG = [
