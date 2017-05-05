@@ -39,15 +39,15 @@ class Runner:
                     return
             path = os.path.join(os.getcwd(), event.src_path)
             cmd = 'cd {} && chmod +x .onchange &&  ./.onchange {}'.format(self.parent.folder, path)
-            print(cmd)
             os.system(cmd)
+            logging.info('done single file'.format(self.parent.folder, path))
 
         def on_modified(self, event):
             for ignore in ['.onchange', '.git', '.idea']:
                 if event.src_path.find(ignore) >= 0:
                     # logging.info('ignore {}'.format(event))
                     return
-            logging.info('Got it! {} {}'.format(event, arrow.now()))
+            # logging.info('Got it! {} {}'.format(event, arrow.now()))
             self.parent.last_modify = arrow.now()
 
     def execute(self):
@@ -55,7 +55,7 @@ class Runner:
             if self.last_modify > self.last_change:
                 self.last_change = self.last_modify
                 time.sleep(0.1)
-                logging.info('execute script {}/.onchange'.format(self.folder))
+                # logging.info('execute script {}/.onchange'.format(self.folder))
                 os.system('cd {} && chmod +x .onchange &&  ./.onchange'.format(self.folder))
                 logging.info('done {}'.format(self.folder))
                 os.system("osascript -e 'display notification \"Sync Done\"'")
