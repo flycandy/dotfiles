@@ -40,7 +40,7 @@ class Runner:
             path = os.path.join(os.getcwd(), event.src_path)
             cmd = 'cd {} && chmod +x .onchange &&  ./.onchange {}'.format(self.parent.folder, path)
             os.system(cmd)
-            logging.info('done single file'.format(self.parent.folder, path))
+            logging.info('done {} {}'.format(self.parent.folder, path))
 
         def on_modified(self, event):
             for ignore in ['.onchange', '.git', '.idea']:
