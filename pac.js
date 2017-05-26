@@ -34,6 +34,7 @@ var RULES = [
   ".w3schools.com",
   ".dropbox.com",
   ".poloniex.com",
+  ".gmail.com",
   ".jsfiddle.net",
 ];
 
