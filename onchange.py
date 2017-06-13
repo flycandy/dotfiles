@@ -38,6 +38,7 @@ class Runner:
                     # logging.info('ignore {}'.format(event))
                     return
             path = os.path.join(os.getcwd(), event.src_path)
+            logging.info('do {} {}'.format(self.parent.folder, path))
             cmd = 'cd {} && chmod +x .onchange &&  ./.onchange {}'.format(self.parent.folder, path)
             os.system(cmd)
             logging.info('done {} {}'.format(self.parent.folder, path))
