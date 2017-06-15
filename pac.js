@@ -36,6 +36,7 @@ var RULES = [
   ".poloniex.com",
   ".gmail.com",
   ".jsfiddle.net",
+  "trello-avatars.s3.amazonaws.com",
 ];
 
 var RULES_SG = [
