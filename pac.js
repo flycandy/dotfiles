@@ -38,6 +38,7 @@ var RULES = [
   ".jsfiddle.net",
   "trello-avatars.s3.amazonaws.com",
   ".google-analytics.com",
+  ".golang.org",
 ];
 
 var RULES_SG = [
