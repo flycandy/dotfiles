@@ -35,6 +35,7 @@ var RULES = [
   ".dropbox.com",
   ".poloniex.com",
   ".gmail.com",
+  ".twimg.com",
   ".jsfiddle.net",
   "trello-avatars.s3.amazonaws.com",
   ".google-analytics.com",
