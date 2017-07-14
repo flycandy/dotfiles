@@ -2,6 +2,7 @@
 """
 Usage:
     onchange.py
+    onchange.py exec <folder> <cmd>
     onchange.py <watch>...
 
 execute .onchange script when the parent folder changes
@@ -69,6 +70,48 @@ class Runner:
         threading.Thread(target=self.execute, daemon=True).start()
 
 
+class WatchSingleFolder:
+    def __init__(self, folder, cmd):
+        logging.info('watch folder {}'.format(folder))
+        self.cmd = cmd
+        self.folder = folder
+        self.observer = Observer()
+        self.last_modify = arrow.now()
+        self.last_change = arrow.now().replace(days=-1)
+
+    class MyHandler(FileSystemEventHandler):
+        def __init__(self, parent):
+            self.parent = parent
+
+        def on_created(self, event: FileSystemEvent):
+            for ignore in ['.onchange', '.git', '.idea']:
+                if event.src_path.find(ignore) >= 0:
+                    return
+            print('changed', event)
+
+        def on_modified(self, event):
+            for ignore in ['.onchange', '.git', '.idea']:
+                if event.src_path.find(ignore) >= 0:
+                    return
+            self.parent.last_modify = arrow.now()
+            print('modify', event)
+
+    def execute(self):
+        while True:
+            if self.last_modify > self.last_change:
+                self.last_change = self.last_modify
+                time.sleep(0.1)
+                # logging.info('execute script {}/.onchange'.format(self.folder))
+                print('do', self.cmd)
+            time.sleep(5)
+
+    def start(self):
+        event_handler = self.MyHandler(self)
+        self.observer.schedule(event_handler, self.folder, recursive=True)
+        self.observer.start()
+        threading.Thread(target=self.execute).start()
+
+
 def main():
     docopt = docoptinit(__doc__)
     logging.basicConfig(level=logging.INFO, format='%(asctime)-15s  %(message)s')
@@ -77,14 +120,18 @@ def main():
     if not docopt['<watch>']:
         docopt['<watch>'] = ['.']
     print(docopt)
-    for f in docopt['<watch>']:
-        for folder, folders, files in os.walk(f):
-            if '.onchange' in files:
-                # print(folder)
-                r = Runner(folder)
-                r.start()
-                lst.append(r)
-                # print(x)
+    if docopt['exec']:
+        r = WatchSingleFolder(docopt['<folder>'], docopt['<cmd>'])
+        r.start()
+    else:
+        for f in docopt['<watch>']:
+            for folder, folders, files in os.walk(f):
+                if '.onchange' in files:
+                    # print(folder)
+                    r = Runner(folder)
+                    r.start()
+                    lst.append(r)
+                    # print(x)
     try:
         while True:
             time.sleep(1)
