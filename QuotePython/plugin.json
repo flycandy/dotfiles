@@ -1,0 +1,12 @@
+{
+    "ID":"2f4e384e-76cb-45c3-aea2-b16f5e5c328g",
+    "ActionKeyword":"q",
+    "Name":"Quote Python",
+    "Description":"Quote",
+    "Author":"wangxuehao",
+    "Version":"1.0",
+    "Language":"python",
+    "Website":"https://github.com/Wox-launche/Wox",
+    "IcoPath":"Images\\app.png",
+    "ExecuteFileName":"main.py"
+}
