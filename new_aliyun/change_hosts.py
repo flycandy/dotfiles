@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Usage:
   changehost.py <name>
