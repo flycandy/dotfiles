@@ -5,6 +5,7 @@
 # install docker
 sudo apt update
 sudo apt upgrade
+sudo apt install wget curl ifstat htop -y
 sudo mkdir -p /opt/bin
 sudo wget https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/new_user.py -O /opt/bin/new_user.py
 sudo wget https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/zshrc.sh.j2 -O /home/zshrc
