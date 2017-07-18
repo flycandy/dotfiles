@@ -103,6 +103,8 @@ class WatchSingleFolder:
                 time.sleep(0.1)
                 # logging.info('execute script {}/.onchange'.format(self.folder))
                 print('do', self.cmd)
+                os.system(self.cmd)
+                print('done')
             time.sleep(5)
 
     def start(self):
