@@ -4,7 +4,7 @@
 # bash <(curl -s https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/run.sh)
 # install docker
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 sudo apt install wget curl ifstat htop -y
 sudo mkdir -p /opt/bin
 sudo pip install docopt
