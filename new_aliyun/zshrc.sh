@@ -55,4 +55,4 @@ fi
 
 
 
-export QB_REGION={{region}}
+export QB_REGION={{REGION}}
