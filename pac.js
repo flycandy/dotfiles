@@ -40,6 +40,7 @@ var RULES = [
   "trello-avatars.s3.amazonaws.com",
   ".google-analytics.com",
   ".golang.org",
+  ".bithumb.com",
 ];
 
 var RULES_SG = [
