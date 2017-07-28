@@ -41,6 +41,7 @@ var RULES = [
   ".google-analytics.com",
   ".golang.org",
   ".bithumb.com",
+  ".unpkg.com",
 ];
 
 var RULES_SG = [
