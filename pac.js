@@ -42,6 +42,7 @@ var RULES = [
   ".golang.org",
   ".bithumb.com",
   ".unpkg.com",
+  ".bittrex.com",
 ];
 
 var RULES_SG = [
