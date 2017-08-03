@@ -22,7 +22,7 @@ class Qb(Wox):
         return results
 
     def callwechat(self, friend):
-        os.system(f'start wechatcall.ahk {friend}')
+        os.popen(f'start wechatcall.ahk {friend}')
         WoxAPI.change_query("")
 
 
