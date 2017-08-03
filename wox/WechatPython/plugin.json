@@ -1,0 +1,12 @@
+{
+    "ID":"2f4e324e-76ce-45c3-aea2-b16f5e5c328g",
+    "ActionKeyword":"w",
+    "Name":"Wechat Python",
+    "Description":"Wechat",
+    "Author":"wangxuehao",
+    "Version":"1.0",
+    "Language":"python",
+    "Website":"https://github.com/Wox-launche/Wox",
+    "IcoPath":"Images\\app.png",
+    "ExecuteFileName":"main.py"
+}
