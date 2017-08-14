@@ -192,7 +192,7 @@ async def process_warp(client_reader, client_writer, *, loop=None):
         else:
             host = phost
             port = 80
-        logging.info(f"host {host} port {port}")
+        logging.debug(f"host {host} port {port}")
         try:
             if proxy_selector.get_use_proxy_or_not(host):
                 req_reader, req_writer = await aiosocks.open_connection(proxy=socks5_addr,
