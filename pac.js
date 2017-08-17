@@ -1,6 +1,6 @@
 var PROXY_METHOD = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
-var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1081';
+var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
 
 // A very long list. Hopefully chrome will cache it.
