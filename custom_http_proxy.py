@@ -26,7 +26,8 @@ import json
 import requests
 
 FIRST_COMPLETED = concurrent.futures.FIRST_COMPLETED
-socks5_addr = Socks5Addr('ubuntu.urwork.qbtrade.org', '1080')
+# socks5_addr = Socks5Addr('ubuntu.urwork.qbtrade.org', '1080')
+socks5_addr = Socks5Addr('localhost', '1080')
 socks5_auth = None
 
 REGEX_HOST = re.compile(r'(.+?):([0-9]{1,5})')
@@ -101,7 +102,7 @@ def accept_client(client_reader, client_writer, *, loop=None):
         client_writer.close()
         logging.debug('[%s] Connection closed (took %.5f seconds)' % (ident, time() - started_time))
 
-    logging.debug('[%s] Connection started' % ident)
+    logging.info('[%s] Connection started' % ident)
     task.add_done_callback(client_done)
 
 
@@ -147,7 +148,9 @@ async def process_warp(client_reader, client_writer, *, loop=None):
         await wrap_https(client_reader, client_writer, head, ident, loop)
     else:
         # http proxy
-        logging.debug(f'proxy http website {head}')
+        logging.info(f'proxy http website {head}')
+        # import pprint
+        # pprint.pprint(req)
         phost = False
         sreq = []
         sreqHeaderEndIndex = 0
@@ -192,7 +195,7 @@ async def process_warp(client_reader, client_writer, *, loop=None):
         else:
             host = phost
             port = 80
-        logging.debug(f"host {host} port {port}")
+        logging.info(f"host {host} port {port}")
         try:
             if proxy_selector.get_use_proxy_or_not(host):
                 req_reader, req_writer = await aiosocks.open_connection(proxy=socks5_addr,
@@ -205,44 +208,45 @@ async def process_warp(client_reader, client_writer, *, loop=None):
                         asyncio.open_connection(host, port, flags=TCP_NODELAY,
                                                 loop=loop), timeout=Config.timeout)
                 except:
-                    logging.warning(f'timeout for {host} add it to proxy')
+                    logging.exception(f'timeout for {host} add it to proxy')
                     proxy_selector.set_result(host, timeout=True, use_proxy=False)
                     # if host not in PROXY_HOST:
                     #     PROXY_HOST.append(host)
                     #     asyncio.ensure_future(redis.set('proxy:host', json.dumps(PROXY_HOST)))
                     raise
             logging.debug(f"host {host} port {port} connect")
+            # print(new_head)
             req_writer.write(('%s\r\n' % new_head).encode())
             await req_writer.drain()
             await asyncio.sleep(0.01, loop=loop)
 
-            def generate_dummyheaders():
-                def generate_rndstrs(strings, length):
-                    return ''.join(random.choice(strings) for _ in range(length))
+            # def generate_dummyheaders():
+                # def generate_rndstrs(strings, length):
+                    # return ''.join(random.choice(strings) for _ in range(length))
+# 
+                # import string
+                # return ['X-%s: %s\r\n' % (generate_rndstrs(string.ascii_uppercase, 16),
+                                          # generate_rndstrs(string.ascii_letters + string.digits, 128)) for _ in
+                        # range(32)]
 
-                import string
-                return ['X-%s: %s\r\n' % (generate_rndstrs(string.ascii_uppercase, 16),
-                                          generate_rndstrs(string.ascii_letters + string.digits, 128)) for _ in
-                        range(32)]
+            # req_writer.writelines(list(map(lambda x: x.encode(), generate_dummyheaders())))
+            # await req_writer.drain()
 
-            req_writer.writelines(list(map(lambda x: x.encode(), generate_dummyheaders())))
-            await req_writer.drain()
+            #req_writer.write(b'Host: ')
+            #await req_writer.drain()
 
-            req_writer.write(b'Host: ')
-            await req_writer.drain()
-
-            def feed_phost(phost):
-                i = 1
-                while phost:
-                    yield random.randrange(2, 4), phost[:i]
-                    phost = phost[i:]
-                    i = random.randrange(2, 5)
-
-            for delay, c in feed_phost(phost):
-                await asyncio.sleep(0.01, loop=loop)
-                req_writer.write(c.encode())
-                await req_writer.drain()
-            req_writer.write(b'\r\n')
+            #def feed_phost(phost):
+                #i = 1
+                #while phost:
+                    #yield random.randrange(2, 4), phost[:i]
+                    #phost = phost[i:]
+                    #i = random.randrange(2, 5)
+#
+            #for delay, c in feed_phost(phost):
+                #await asyncio.sleep(0.01, loop=loop)
+                #req_writer.write(c.encode())
+                #await req_writer.drain()
+            #req_writer.write(b'\r\n')
             req_writer.writelines(list(map(lambda x: (x + '\r\n').encode(), sreq)))
             req_writer.write(b'\r\n')
             if payload != b'':
