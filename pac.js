@@ -43,7 +43,6 @@ var RULES = [
   ".bithumb.com",
   ".unpkg.com",
   ".bittrex.com",
-  ".qbtrade.org",
   ".jubi.com",  // 因为远程登录抓trans的原因
 ];
 
