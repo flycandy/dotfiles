@@ -112,13 +112,13 @@ async def process_warp(client_reader, client_writer, *, loop=None):
     payload = b''
     try:
         RECV_MAX_RETRY = 3
-        recvRetry = 0
+        recv_retry = 0
         while True:
             line = await client_reader.readline()
             if not line:
-                if len(header) == 0 and recvRetry < RECV_MAX_RETRY:
+                if len(header) == 0 and recv_retry < RECV_MAX_RETRY:
                     # handle the case when the client make connection but sending data is delayed for some reasons
-                    recvRetry += 1
+                    recv_retry += 1
                     await asyncio.sleep(0.2, loop=loop)
                     continue
                 else:
@@ -131,7 +131,7 @@ async def process_warp(client_reader, client_writer, *, loop=None):
         m = REGEX_CONTENT_LENGTH.search(header)
         if m:
             cl = int(m.group(1))
-            while (len(payload) < cl):
+            while len(payload) < cl:
                 payload += await client_reader.read(1024)
     except Exception as e:
         logging.warning(e)
@@ -221,32 +221,32 @@ async def process_warp(client_reader, client_writer, *, loop=None):
             await asyncio.sleep(0.01, loop=loop)
 
             # def generate_dummyheaders():
-                # def generate_rndstrs(strings, length):
-                    # return ''.join(random.choice(strings) for _ in range(length))
-# 
-                # import string
-                # return ['X-%s: %s\r\n' % (generate_rndstrs(string.ascii_uppercase, 16),
-                                          # generate_rndstrs(string.ascii_letters + string.digits, 128)) for _ in
-                        # range(32)]
+            # def generate_rndstrs(strings, length):
+            # return ''.join(random.choice(strings) for _ in range(length))
+            #
+            # import string
+            # return ['X-%s: %s\r\n' % (generate_rndstrs(string.ascii_uppercase, 16),
+            # generate_rndstrs(string.ascii_letters + string.digits, 128)) for _ in
+            # range(32)]
 
             # req_writer.writelines(list(map(lambda x: x.encode(), generate_dummyheaders())))
             # await req_writer.drain()
 
-            #req_writer.write(b'Host: ')
-            #await req_writer.drain()
+            # req_writer.write(b'Host: ')
+            # await req_writer.drain()
 
-            #def feed_phost(phost):
-                #i = 1
-                #while phost:
-                    #yield random.randrange(2, 4), phost[:i]
-                    #phost = phost[i:]
-                    #i = random.randrange(2, 5)
-#
-            #for delay, c in feed_phost(phost):
-                #await asyncio.sleep(0.01, loop=loop)
-                #req_writer.write(c.encode())
-                #await req_writer.drain()
-            #req_writer.write(b'\r\n')
+            # def feed_phost(phost):
+            # i = 1
+            # while phost:
+            # yield random.randrange(2, 4), phost[:i]
+            # phost = phost[i:]
+            # i = random.randrange(2, 5)
+            #
+            # for delay, c in feed_phost(phost):
+            # await asyncio.sleep(0.01, loop=loop)
+            # req_writer.write(c.encode())
+            # await req_writer.drain()
+            # req_writer.write(b'\r\n')
             req_writer.writelines(list(map(lambda x: (x + '\r\n').encode(), sreq)))
             req_writer.write(b'\r\n')
             if payload != b'':
