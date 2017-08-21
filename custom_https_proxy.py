@@ -58,7 +58,7 @@ async def check_iscn(host):
         r = await ss.get(url.format(host))
         html = await r.text()
         html = html.lower()
-        if 'china' in html:
+        if 'china' in html or r.status != 200:
             return True
         else:
             return False
