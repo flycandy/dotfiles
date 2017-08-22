@@ -58,7 +58,9 @@ async def check_iscn(host):
         r = await ss.get(url.format(host))
         html = await r.text()
         html = html.lower()
-        if 'china' in html or r.status != 200:
+        if r.status != 200:
+            return None
+        if 'china' in html:
             return True
         else:
             return False
@@ -93,6 +95,9 @@ class ProxySelector:
         if host in self.cn or host in self.notcn:
             return
         r = await check_iscn(host)
+        if r is None:
+            logging.warning('not 200, not update')
+            return
         if r:
             self.cn.add(host)
             await self.redis.sadd('proxy:ip.cn:cn', [host])
