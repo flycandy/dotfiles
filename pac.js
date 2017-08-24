@@ -1,18 +1,6 @@
 var PROXY_METHOD = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
-
 var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
-
-// A very long list. Hopefully chrome will cache it.
-
-// Bypass top Chinese sites
-// Sources:
-// (1) Custom list
-// (2) https://dl-web.dropbox.com/u/3241202/apps/chn-cdn/dnsmasq.server.conf - ihipop
-// (3) @xream's whitelist
-// (4) Alexa 500
-
-// Feel free to add or edit custom list
 var RULES = [
   ".facebook.com",
   ".wikipedia.org",
