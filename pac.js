@@ -2,6 +2,7 @@ var PROXY_METHOD = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
 var RULES = [
+  ".qbtrade.org",
   ".facebook.com",
   ".wikipedia.org",
   ".trello.com",
