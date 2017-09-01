@@ -3,6 +3,7 @@ var PROXY_DROPLET_SG = 'SOCKS5 ubuntu.urwork.qbtrade.org:1080';
 
 var RULES = [
   ".qbtrade.org",
+  ".ipinfo.io",
   ".facebook.com",
   ".wikipedia.org",
   ".trello.com",
