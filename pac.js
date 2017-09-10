@@ -34,6 +34,7 @@ var RULES = [
   ".unpkg.com",
   ".bittrex.com",
   ".bitfinex.com",
+  ".binance.com",
   ".bter.com",
   ".jubi.com",  // 因为远程登录抓trans的原因
 ];
