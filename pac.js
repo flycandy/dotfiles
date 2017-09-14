@@ -5,6 +5,7 @@ var RULES = [
   ".qbtrade.org",
   ".ipinfo.io",
   ".facebook.com",
+  ".facebook.net",
   ".wikipedia.org",
   ".trello.com",
   ".trellocdn.com",
