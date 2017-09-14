@@ -27,7 +27,7 @@ var RULES = [
   ".gmail.com",
   ".twimg.com",
   ".jsfiddle.net",
-  "trello-avatars.s3.amazonaws.com",
+  ".amazonaws.com",
   ".google-analytics.com",
   ".golang.org",
   ".bithumb.com",
