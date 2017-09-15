@@ -54,6 +54,7 @@ class Config:
 
 async def check_iscn(host):
     url = 'http://ip.cn/index.php?ip={}'
+    logging.info(f'checking {host}')
     async with aiohttp.ClientSession() as ss:
         r = await ss.get(url.format(host))
         html = await r.text()
@@ -88,7 +89,9 @@ class ProxySelector:
         for x in await self.redis.smembers('proxy:ip.cn:notcn'):
             self.notcn.add(await x)
 
+        print('----cn------')
         print(self.cn)
+        print('----not cn------')
         print(self.notcn)
 
     async def update_proxy(self, host):
@@ -99,9 +102,11 @@ class ProxySelector:
             logging.warning('not 200, not update')
             return
         if r:
+            logging.info(f'add cn {host}')
             self.cn.add(host)
             await self.redis.sadd('proxy:ip.cn:cn', [host])
         else:
+            logging.info(f'add not cn {host}')
             self.notcn.add(host)
             await self.redis.sadd('proxy:ip.cn:notcn', [host])
 
@@ -122,7 +127,7 @@ class ProxySelector:
         return False, 'default'
 
     def add_outwall(self, host):
-        logging.info('add to outwall', host)
+        logging.info(f'add to outwall {host}')
         self.proxy_host[host] = True
 
     def set_result(self, host, timeout, use_proxy):
