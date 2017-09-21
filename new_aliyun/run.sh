@@ -6,7 +6,7 @@
 # install docker
 sudo apt update
 sudo apt upgrade -y
-sudo apt install wget curl ifstat htop -y
+sudo apt install wget curl ifstat htop python python3 python-pip python3-pip -y
 sudo mkdir -p /opt/bin
 sudo pip install docopt
 sudo pip3 install docopt
