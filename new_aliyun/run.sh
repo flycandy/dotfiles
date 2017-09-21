@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+# first
+# export REGION=alihz
 # exec by
 # bash <(curl -s https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/run.sh)
 # install docker
@@ -19,7 +20,7 @@ sudo chmod +x /opt/bin/pyenv-installer
 sudo chmod +x /opt/bin/change_hosts.py
 
 sudo wget https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/zshrc.sh -O /home/zshrc
-sudo sed -i -e 's/{{REGION}}/alihz/g' /home/zshrc
-sudo sed -i -e 's/{{REGION}}/alihz/g' /opt/bin/new_user.py
+sudo sed -i -e 's/{{REGION}}/$REGION/g' /home/zshrc
+sudo sed -i -e 's/{{REGION}}/$REGION/g' /opt/bin/new_user.py
 
 
