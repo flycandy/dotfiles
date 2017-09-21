@@ -22,5 +22,5 @@ sudo chmod +x /opt/bin/change_hosts.py
 sudo wget https://raw.githubusercontent.com/qbtrade/dotfiles/master/new_aliyun/zshrc.sh -O /home/zshrc
 sudo sed -i -e "s/{{REGION}}/$REGION/g" /home/zshrc
 sudo sed -i -e "s/{{REGION}}/$REGION/g" /opt/bin/new_user.py
-
+sudo pip install docopt
 
